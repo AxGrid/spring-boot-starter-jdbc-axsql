@@ -30,6 +30,7 @@ public class AxSQLCommandDescription {
         res.setObject(ctx.object().stream().map(AxSQLObject::parse).findFirst().orElse(null));
         res.setMapper(ctx.mapper().stream().map(AxSQLMapper::parse).findFirst().orElse(null));
         List<AxSQLParameter> parameters = new ArrayList<>();
+
         for(int i=0;i<ctx.param().size();i++)
             parameters.add(AxSQLParameter.parse(i, ctx.param(i)));
         res.setParameters(parameters);

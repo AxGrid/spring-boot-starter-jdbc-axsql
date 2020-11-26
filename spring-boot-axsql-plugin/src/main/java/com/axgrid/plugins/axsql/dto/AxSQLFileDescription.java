@@ -25,6 +25,7 @@ public class AxSQLFileDescription {
         var parser = new AxSQLGrammarParser(new CommonTokenStream(lexer));
         List<AxSQLGrammarParser.QueryContext> commands = new ArrayList<>(parser.queries().query());
         AxSQLFileDescription res = new AxSQLFileDescription();
+
         res.setCommands(commands.stream().map(AxSQLCommandDescription::parse).collect(Collectors.toList()));
         if (res.commands.stream().anyMatch(item -> item.getName() == null || item.getName().isBlank())) {
 
