@@ -18,10 +18,6 @@ public class AxSQLCommandDescription {
     AxSQLMapper mapper;
     AxSQLObject object;
 
-    public static String getFlatSQL(AxSQLGrammarParser.StatementContext statement) {
-        return statement.line().stream().map(line -> line.sql().getText().trim()).collect(Collectors.joining(" "));
-    }
-
     public static AxSQLCommandDescription parse(AxSQLGrammarParser.QueryContext ctx) {
         AxSQLCommandDescription res = new AxSQLCommandDescription();
 
@@ -30,7 +26,7 @@ public class AxSQLCommandDescription {
             res.setExecution(ParserUtils.getExecution(ctx.name().execute_name()));
         }
 
-        res.setSql(getFlatSQL(ctx.statement()));
+        res.setSql(ParserUtils.getFlatSQL(ctx.statement()));
         res.setObject(ctx.object().stream().map(AxSQLObject::parse).findFirst().orElse(null));
         res.setMapper(ctx.mapper().stream().map(AxSQLMapper::parse).findFirst().orElse(null));
         List<AxSQLParameter> parameters = new ArrayList<>();

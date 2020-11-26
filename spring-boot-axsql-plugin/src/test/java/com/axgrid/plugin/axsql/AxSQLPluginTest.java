@@ -39,5 +39,6 @@ public class AxSQLPluginTest {
         Assert.assertNotNull(command.getParameters().get(3).getCast());
         Assert.assertEquals(command.getParameters().get(3).getCast(), ".getInteger()");
 
+        Assert.assertEquals(command.getSql().toLowerCase(), "update test set name=?, k=?, enum=? where id=?;");
     }
 }
